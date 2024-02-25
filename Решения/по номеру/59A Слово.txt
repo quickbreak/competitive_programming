@@ -1,0 +1,15 @@
+input_string = input()
+alfabet = ''
+for i in range(97, 97 + 26):
+    alfabet += chr(i)
+
+counter = 0
+for symbol in input_string:
+    if symbol in alfabet:
+        counter += 1
+if len(input_string) - counter > counter:
+    input_string = input_string.upper()
+else:
+    input_string = input_string.lower()
+
+print(input_string)

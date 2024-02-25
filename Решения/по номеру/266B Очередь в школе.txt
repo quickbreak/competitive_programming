@@ -1,0 +1,52 @@
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+#include<set>
+#include<vector>
+#include<algorithm>
+#include<stack>
+#include<queue>
+#include<map>
+#include<any>
+#include<string>
+
+#define fori(it, a, b) for(int it = a; it < b; it++)
+#define all(x) (x).begin(),(x).end()
+#define cn cout << '\n'
+#define minel(v) *min_element(v.begin(), v.end());
+#define maxel(v) *max_element(v.begin(), v.end());
+#define sortv(v) sort(v.begin(), v.end());
+#define forl(a, k, b) for(long long a = k; a < b; a++)
+#define useless ios_base::sync_with_stdio(false); cin.tie(NULL);
+
+using namespace std;
+
+using ll = long long;
+using str = string;
+using ld = long double;
+using vi = vector<int>;
+using vl = vector<ll>;
+
+int main()
+{
+	useless;
+
+	int n, t;
+	cin >> n >> t;
+	str s; cin >> s;
+	int i;
+	fori(j, 0, t)
+	{
+		i = 0;
+		while (i < n - 1)
+		{
+			if (s[i] == 'B' && s[i + 1] == 'G')
+			{
+				swap(s[i], s[i + 1]);
+				i += 2;
+			}
+			else i++;
+		}
+	}
+	cout << s;
+}

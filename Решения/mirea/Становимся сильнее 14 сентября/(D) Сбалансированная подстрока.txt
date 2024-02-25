@@ -1,0 +1,54 @@
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+#include<set>
+#include<vector>
+#include<algorithm>
+#include<stack>
+#include<map>
+
+#define fori(it,a,b) for(int it=a;it<b;it++)
+
+using namespace std;
+
+using ll = long long;
+using str = string;
+using ld = long double;
+using vi = vector<int>;
+
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	int n; cin >> n;
+	str s; cin >> s;
+	vi res(2*n+1, -10);
+	int h = n;
+	int ans = 0;
+	res[h] = -1;
+	fori(i, 0, n)
+	{
+		if (s[i] == '1')
+		{
+			h += 1;
+			if (res[h] == -10)
+			{
+				res[h] = i;
+			}
+			else {
+				ans = max(ans, i - res[h]);
+			}
+		}
+		else {
+			h -= 1;
+			if (res[h] == -10)
+			{
+				res[h] = i;
+			}
+			else {
+				ans = max(ans, i - res[h]);
+			}
+		}
+	}
+	cout << ans;
+}

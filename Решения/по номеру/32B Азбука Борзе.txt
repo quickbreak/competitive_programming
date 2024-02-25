@@ -1,0 +1,57 @@
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+#include<set>
+#include<vector>
+#include<algorithm>
+#include<stack>
+#include<queue>
+#include<map>
+#include<any>
+#include<string>
+
+#define fori(it, a, b) for(int it = a; it < b; it++)
+#define all(x) (x).begin(),(x).end()
+#define cn cout << '\n'
+#define minel(v) *min_element(v.begin(), v.end());
+#define maxel(v) *max_element(v.begin(), v.end());
+#define sortv(v) sort(v.begin(), v.end());
+#define forl(a, k, b) for(long long a = k; a < b; a++)
+#define useless ios_base::sync_with_stdio(false); cin.tie(NULL);
+
+using namespace std;
+
+using ll = long long;
+using str = string;
+using ld = long double;
+using vi = vector<int>;
+using vl = vector<ll>;
+
+int main()
+{
+	useless;
+
+	
+	str res;
+	str s; cin >> s;
+	int n = s.size(), i = 0;
+	//число x в системе счисления основания b = (...((x[0]*b+x[1])*b+x[2])*b+...)+x[n-1]
+	while (i < n)
+	{
+		if (s[i] == '.')
+		{
+			res += '0';
+			i++;
+		}
+		else if (s[i] == '-' && s[i + 1] == '.')
+		{
+			res += '1';
+			i += 2;
+		}
+		else {
+			res += '2';
+			i += 2;
+		}
+	}
+	cout << res;
+}

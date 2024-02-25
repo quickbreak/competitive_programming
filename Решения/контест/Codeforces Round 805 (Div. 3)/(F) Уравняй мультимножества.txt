@@ -1,0 +1,69 @@
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+#include<set>
+#include<vector>
+#include<algorithm>
+#include<stack>
+#include<map>
+
+#define fori(it,a,b) for(int it=a;it<b;it++)
+#define all(x) (x).begin(),(x).end()
+#define cn cout << '\n'
+
+using namespace std;
+
+using ll = long long;
+using str = string;
+using ld = long double;
+using vi = vector<int>;
+using vl = vector<ll>;
+
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+
+    int t, n, b, m, k;
+    str s;
+    cin >> t;
+    while (t--)
+    {
+        cin >> n;
+        multiset<int>st1, st2; 
+        int x;
+        fori(i, 0, n)
+        {
+            cin >> x;
+            while (x % 2 == 0) //делаем все элементы мультимножества st1 нечётными
+                x /= 2;
+            st1.insert(x);
+        }
+        fori(i, 0, n)
+        {
+            cin >> x;
+            st2.insert(x);
+        }
+        //больше не имеет смысла пользоваться первой операцией (умножением на 2), 
+        //так как получим четное число, а в мультимножестве a остались только нечетные числа
+        while (!st2.empty())
+        {
+            x = *st2.rbegin(); //берём максимальное число
+            if (st1.count(x) == 0) //если числа нет в st1
+            {
+                if (x == 1) //делить некуда, а умножать бессмысленно. Ответ: множества не уровнять
+                    break;
+                st2.erase(st2.find(x));
+                st2.insert(x / 2);
+            }
+            else 
+            {
+                st2.erase(st2.find(x));
+                st1.erase(st1.find(x));
+            }
+        }
+        cout << (st2.empty() ? "YES" : "NO"); cn;
+    }
+}

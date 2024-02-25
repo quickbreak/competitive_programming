@@ -1,0 +1,68 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<vector>
+#include<string>
+#include<cmath>
+#include<stack>
+#include<queue>
+#include<set>
+#include<map>
+using namespace std;
+
+int main()
+{
+#ifdef _DEBUG
+	freopen("input.txt", "rt", stdin);
+	freopen("output.txt", "wt", stdout);
+#endif
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+
+	int test;
+	cin >> test;
+	for (int h = 0; h < test; h++)
+	{
+		int n;
+		cin >> n;
+		vector<int> mlst;
+		string s, s1;
+		cin >> s;
+		int uk1 = 0;
+		int uk2 = n - 1;
+		long long sum = 0;
+		for (int i = 0; i < n; i++)
+		{
+			if (s[i] == 'L')
+			{
+				if (uk2 > uk1)
+				{
+					mlst.push_back(uk2 - uk1);
+				}
+				sum += uk1;
+			}
+			if (s[i] == 'R')
+			{
+				if (uk1 > uk2)
+				{
+					mlst.push_back(uk1 - uk2);
+				}
+				sum += uk2;
+			}
+			uk1++;
+			uk2--;
+		}
+		sort(mlst.begin(), mlst.end());
+		for (int i = 0; i < n; i++)
+		{
+			if (mlst.size() > 0)
+			{
+				sum += mlst[mlst.size() - 1];
+				mlst.pop_back();
+			}
+			cout << sum << " ";
+		}
+		cout << '\n';
+	}
+
+}

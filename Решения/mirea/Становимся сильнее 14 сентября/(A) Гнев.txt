@@ -1,0 +1,45 @@
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+#include<set>
+#include<vector>
+#include<algorithm>
+#include<stack>
+#include<map>
+
+#define fori(it,a,b) for(int it=a;it<b;it++)
+
+using namespace std;
+
+using ll = long long;
+using str = string;
+using ld = long double;
+
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	int n;
+	cin >> n;
+	vector<int>res(n);
+	int ind;
+	fori(i, 0, n)
+	{
+		cin >> ind;
+		int j = 0;
+		if (i - ind < 0)
+			j = 0;
+		else j = i - ind;
+		res[j]++;
+		res[i]--;
+	}
+	ll balance = 0;
+	ll ans = 0;
+	fori(i, 0, n)
+	{
+		balance += res[i];
+		if (balance == 0)
+			ans++;
+	}
+	cout << ans;
+}

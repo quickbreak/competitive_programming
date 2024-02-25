@@ -1,0 +1,38 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<vector>
+#include<string>
+#include<cmath>
+#include<stack>
+#include<queue>
+#include<set>
+#include<map>
+
+using namespace std;
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	freopen("floyd.in", "rt", stdin);
+	freopen("floyd.out", "wt", stdout);
+	int n, k, x;
+	cin >> n;
+	vector<vector<int>>d(n + 1, vector<int>(n + 1));
+	vector<vector<int>>W(n + 1, vector<int>(n + 1));
+	for (int i = 0;i < n;i++)
+	{
+		for (int j = 0;j < n;j++)
+			cin >> d[i][j];
+	}
+	for (int k = 0; k < n; ++k)
+		for (int i = 0; i < n; ++i)
+			for (int j = 0; j < n; ++j)
+				d[i][j] = min(d[i][j], d[i][k] + d[k][j]);
+	for (int i = 0;i < n;i++)
+	{
+		for (int j = 0;j < n;j++)
+			cout<< d[i][j]<<' ';
+		cout << endl;
+	}
+}

@@ -1,0 +1,9 @@
+t = int(input())
+for _ in range(t):
+    ans = ''
+    for i in range(8):
+        s = input()
+        for j in s:
+            if j!='.':
+                ans+=j
+    print(ans)

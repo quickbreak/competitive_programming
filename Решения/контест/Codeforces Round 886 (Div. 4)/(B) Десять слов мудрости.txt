@@ -1,0 +1,12 @@
+t = int(input())
+for _ in range(t):
+    n = int(input())
+    res = -10000000
+    ans = 1
+    for i in range(n):
+        a, b = map(int, input().split())
+        if a <= 10:
+            if b > res:
+                res = b
+                ans = i+1
+    print(ans)

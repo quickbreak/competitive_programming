@@ -1,0 +1,48 @@
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+#include<set>
+#include<vector>
+#include<algorithm>
+#include<stack>
+#include<queue>
+#include<map>
+#include<any>
+#include<string>
+
+#define fori(it, a, b) for(int it = a; it < b; it++)
+#define all(x) (x).begin(),(x).end()
+#define cn cout << '\n'
+#define minel(v) *min_element(v.begin(), v.end());
+#define maxel(v) *max_element(v.begin(), v.end());
+#define sortv(v) sort(v.begin(), v.end());
+#define forl(a, k, b) for(long long a = k; a < b; a++)
+#define useless ios_base::sync_with_stdio(false); cin.tie(NULL);
+
+using namespace std;
+
+using ll = long long;
+using str = string;
+using ld = long double;
+using vi = vector<int>;
+using vl = vector<ll>;
+
+int main()
+{
+	useless;
+
+	int n;
+	cin >> n;
+	int x, y, z;
+	int sumx = 0, sumy = 0, sumz = 0;
+	while (n--)
+	{
+		cin >> x >> y >> z;
+		sumx += x;
+		sumy += y;
+		sumz += z;
+	}
+	if (sumx==0 && sumy==0 && sumz==0)
+		cout << "YES";
+	else cout << "NO";
+}

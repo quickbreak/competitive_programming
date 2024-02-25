@@ -1,0 +1,46 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<vector>
+#include<string>
+#include<cmath>
+#include<stack>
+#include<queue>
+#include<set>
+#include<map>
+#include<iomanip>
+
+#define minel(v) *min_element(v.begin(), v.end());
+#define maxel(v) *max_element(v.begin(), v.end());
+#define sortv(v) sort(v.begin(), v.end());
+#define fori(a, k, b) for(int a = k; a < b; a++)
+#define forl(a, k, b) for(long long a = k; a < b; a++)
+#define vec(v) vector<int>v;
+#define vec(v,n) vector<int>v(n);
+#define longvec(v) vector<long long>v;
+#define longvec(v,n) vector<long long>v(n);
+#define useless ios_base::sync_with_stdio(false); cin.tie(NULL);
+
+using namespace std;
+
+int main() {
+	useless;
+	int n, k;
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		cin >> n >> k;
+		int uk = 0;
+		while (uk < n / 2)
+		{
+			cout << n - uk << ' ' << uk+1 << ' ';
+			uk++;
+		}
+		if (n % 2 != 0)
+		{
+			cout << uk + 1;
+		}
+		cout << '\n';
+	}
+}

@@ -1,0 +1,11 @@
+num = input()
+n = len(num)
+cnt = 0
+for i in range(n):
+    if num[i] in '47':
+        cnt+=1
+sversion = str(cnt)
+if sversion.count('4')+sversion.count('7')==len(sversion):
+    print("YES")
+else: 
+    print("NO")

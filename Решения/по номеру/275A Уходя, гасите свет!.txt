@@ -1,0 +1,15 @@
+res = [[1, 1, 1] for _ in range(3)]
+# print(a)
+operations = [[0, 0, 0, 0, 0] for _ in range(5)]
+for i in range(3):
+    operations[i][0], operations[i][1], operations[i][2] = map(int, (input().split()))
+
+for i in range(3):
+    for j in range(3):
+        res[i][j] = (operations[i][j] + operations[i + 1][j] + operations[i - 1][j] + operations[i][j + 1] +
+                     operations[i][j - 1]) % 2 == 0
+
+for i in range(3):
+    for j in range(3):
+        print(int(res[i][j]), end='')
+    print()
