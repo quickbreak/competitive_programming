@@ -42,42 +42,17 @@ struct ListNode {
 };
 
 
-//class Solution {
-//public:
-//    bool isPalindrome(ListNode* head) {
-//        ListNode* x;
-//        x = head;
-//        while (true) {
-//            
-//            //
-//            if (x->next == nullptr)
-//                break;
-//        }
-//
-//    }
-//};
-
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
         ListNode* x;
         x = head;
-        vector<int>a;
-        int i = -1;
         while (true) {
-            a.push_back(x->val);
+            
+            //
             if (x->next == nullptr)
                 break;
-            x = x->next;
-
         }
-        int n = a.size();
-        for (int i = 0; i < n / 2; ++i) {
-            if (a[i] != a[n - i - 1]) {
-                return false;
-            }
-        }
-        return true;
 
     }
 };
