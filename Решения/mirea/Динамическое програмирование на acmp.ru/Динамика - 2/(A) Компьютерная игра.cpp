@@ -56,6 +56,7 @@ ll binpow(ll base, ll p)
 	}
 }
 
+const int inf = int(1e9) + 7;
 
 int32_t main()
 {
@@ -65,10 +66,14 @@ int32_t main()
 	vi a(n + 1);
 	fori(i, 1, n + 1)
 		cin >> a[i];
+	
+	//a[0] = -inf;
 	vi d(n + 1);
 	d[0] = 0;
 	d[1] = 0;
-	fori(i, 2, n + 1)
+	if (n > 1)
+		d[2] = abs(a[2] - a[1]);
+	fori(i, 3, n + 1)
 		d[i] = min(d[i - 1] + abs(a[i] - a[i - 1]), d[i - 2] + 3 * abs(a[i] - a[i - 2]));
 	cout << d[n];
 }

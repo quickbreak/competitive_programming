@@ -42,17 +42,34 @@ struct ListNode {
 };
 
 
+//class Solution {
+//public:
+//    bool isPalindrome(ListNode* head) {
+//        ListNode* x;
+//        x = head;
+//        while (true) {
+//            
+//            //
+//            if (x->next == nullptr)
+//                break;
+//        }
+//
+//    }
+//};
+
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
         ListNode* x;
         x = head;
         vector<int>a;
-        while(true) {
+        int i = -1;
+        while (true) {
             a.push_back(x->val);
             if (x->next == nullptr)
                 break;
-            
+            x = x->next;
+
         }
         int n = a.size();
         for (int i = 0; i < n / 2; ++i) {
@@ -70,19 +87,16 @@ int main()
 {
     useless;
 
-    ListNode El1;
-    ListNode El2;
-    El1.val = 3;
-    El2.val = 6;
-    //ListNode* p;
-    //p = &El2;
-    El1.next = &El2;
-    cout << El1.next->val;
+    //Test:
+    ListNode n_4(1);
+    ListNode n_3(2);
+    n_3.next = &n_4;
+    ListNode n_2(2, &n_3);
+    ListNode n_1(1, &n_2);
+    Solution s;
+    s.isPalindrome(&n_1);
 
-    int n;
-    ListNode el;
-    fori(i, 0, n)
-    {
-        cin >> el.val;
-    }
+   /* int x = 5;
+    int* y = &x;*/
+    
 }
