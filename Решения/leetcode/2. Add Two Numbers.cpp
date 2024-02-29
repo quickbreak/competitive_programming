@@ -66,48 +66,39 @@ struct ListNode {
 class Solution {
 public:
 	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-		ListNode curr(0);
-		//curr = (0, nullptr);
-		ListNode previous(0);
-		//previous = (0, nullptr);
-		int perehod = 0;
-		//previous.val = (l1->val + l2->val + perehod) % 10;
-		//perehod = ((l1->val + l2->val + perehod) / 10 != 0);
-		//if (l1->next == nullptr && l2->next == nullptr) {
-		//	previous.next = nullptr;
-		//	return &previous;
+		int perenos = 0;
+		ListNode* head = new ListNode();
+		ListNode* current;
+		current = head;
+		int summa, x, y;
+		while (!(l1 == NULL && l2 == NULL && perenos == 0)) {
 
-		//}
+			if (l1 == NULL)
+				x = 0;
+			else x = l1->val;
+			if (l2 == NULL)
+				y = 0;
+			else y = l2->val;
 
-		ListNode head;
-		head.val = (l1->val + l2->val + perehod) % 10;
-		int cnt = 0;
-		
-		do {
-			cnt++;
-			if (l1->next == nullptr) {
-				l2 = l2->next;
-				curr.val = (l2->val + perehod) % 10;
-				perehod = ((l1->val + l2->val + perehod) / 10 != 0);
-			}
-			else if (l2->next == nullptr) {
+			summa = x + y + perenos;
+			perenos = summa / 10;
+			current->next = new ListNode(summa % 10);
+			current = current->next;
+			
+			if (l1 != NULL)
 				l1 = l1->next;
-				curr.val = (l1->val + perehod) % 10;
-				perehod = ((l1->val + l2->val + perehod) / 10 != 0);
-			}
-			else {
-				l1 = l1->next;
+			if (l2 != NULL)
 				l2 = l2->next;
-				curr.val = (l1->val + l2->val + perehod) % 10;
-				perehod = ((l1->val + l2->val + perehod) / 10 != 0);
-			}
-			previous.next = &curr;
-			if (cnt == 1)
-				head.next = &curr;
-			previous = curr;
-		} while (l1->next != nullptr || l2->next != nullptr);
-		
-		return &head;
+
+		}
+		return head->next;
+	}
+	void print(ListNode* head) {
+		do
+		{
+			cout << head->val << ' ';
+			head = head->next;
+		} while (head != NULL);
 
 	}
 };
@@ -128,6 +119,16 @@ int main()
 	ListNode l2_2(6, &l2_3);
 	ListNode l2(5, &l2_2);
 
+	/*ListNode l1(0);
+	ListNode l2(0);*/
+
+
+	/*ListNode l2_2(9);
+	ListNode l2(9, &l2_2);
+
+	ListNode l1(9);*/
+
+
 	Solution S;
-	cout << S.addTwoNumbers(&l1, &l2);
+	S.print(S.addTwoNumbers(&l1, &l2));
 }

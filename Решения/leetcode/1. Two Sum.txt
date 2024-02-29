@@ -1,0 +1,24 @@
+#include<vector>
+#include<unordered_map>
+using namespace std;
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int>mp;
+        int n = nums.size();
+        vector<int>res;
+        for (int i = 0; i < n; i++)
+        {
+            if (mp.contains(target - nums[i]))
+            {
+                res.push_back(mp.find(target - nums[i])->second);
+                res.push_back(i);
+                break;
+            }
+                //return { mp.find(target - nums[i])->second, i };
+            else if (!mp.contains(nums[i]))
+                mp.insert({ nums[i], i });
+        }
+        return res;
+    }
+};

@@ -34,6 +34,7 @@ using ld = long double;
 using vi = vector<int>;
 using vl = vector<ll>;
 using vvi = vector<vector<int>>;
+using vvl = vector<vector<long long>>;
 
 const ll mod = ll(1e9+7);
 

@@ -1,0 +1,30 @@
+#include<unordered_map>
+using namespace std;
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        unordered_set<char> st;
+        int n = s.size(); 
+        int ans = 0; 
+        int uk = -1;
+        int i = 0;
+        while(i<n)
+        {
+            if (!st.contains(s[i]))
+            {
+                st.insert(s[i]);
+                ans = max(ans, i - uk);
+            }
+            else {
+                uk++;
+                while (s[uk]!=s[i])
+                {
+                    st.erase(s[uk]);
+                    uk++;
+                }
+            }
+            i++;
+        }
+        return ans;
+    }
+};
