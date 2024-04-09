@@ -19,10 +19,10 @@ int main() {
 
 	int n, k; cin >> n >> k;
 	vector<int>a(n);
-	vector<long long>prefs(n+1); // prefs[i] == сумма первых i элементов
+	vector<long long>prefs(n+1); // prefs[i] == СЃСѓРјРјР° РїРµСЂРІС‹С… i СЌР»РµРјРµРЅС‚РѕРІ
 	prefs[0] = 0;
-	vector<pair<int, int>>cnt(n); // cnt[i] == количество вхождений a[i] элемента в текущий подотрезок
-	vector<long long>min_prefs(n + 1); // минимальная сумма подотрезка 0..uk из подотрезков отрезка 0..i
+	vector<pair<int, int>>cnt(n); // cnt[i] == РєРѕР»РёС‡РµСЃС‚РІРѕ РІС…РѕР¶РґРµРЅРёР№ a[i] СЌР»РµРјРµРЅС‚Р° РІ С‚РµРєСѓС‰РёР№ РїРѕРґРѕС‚СЂРµР·РѕРє
+	vector<long long>min_prefs(n + 1); // РјРёРЅРёРјР°Р»СЊРЅР°СЏ СЃСѓРјРјР° РїРѕРґРѕС‚СЂРµР·РєР° 0..uk РёР· РїРѕРґРѕС‚СЂРµР·РєРѕРІ РѕС‚СЂРµР·РєР° 0..i
 	min_prefs[0] = 0;
 	int uk;
 	for (int i = 0; i < n; ++i) {
@@ -62,10 +62,10 @@ int main() {
 	if (curr_sum > ans_sum) {
 		ans_sum = curr_sum;
 		ans_r = r - 1;
-		// ans_l тут не узнаешь, потом за O(n) найдешь проходом по min_prefs
+		// ans_l С‚СѓС‚ РЅРµ СѓР·РЅР°РµС€СЊ, РїРѕС‚РѕРј Р·Р° O(n) РЅР°Р№РґРµС€СЊ РїСЂРѕС…РѕРґРѕРј РїРѕ min_prefs
 	}
 	while (curr_k >= k) {
-		++l; // когда это плохо? upd: вроде, никогда
+		++l; // РєРѕРіРґР° СЌС‚Рѕ РїР»РѕС…Рѕ? upd: РІСЂРѕРґРµ, РЅРёРєРѕРіРґР°
 		uk = lower_bound(cnt.begin(), cnt.end(), make_pair(a[l - 1], 0)) - cnt.begin();
 		--cnt[uk].second;
 		if (cnt[uk].second == 0)
@@ -80,7 +80,7 @@ int main() {
 		if (curr_sum > ans_sum) {
 			ans_sum = curr_sum;
 			ans_r = r;
-			// ans_l тут не узнаешь, потом за O(n) найдешь проходом по min_prefs
+			// ans_l С‚СѓС‚ РЅРµ СѓР·РЅР°РµС€СЊ, РїРѕС‚РѕРј Р·Р° O(n) РЅР°Р№РґРµС€СЊ РїСЂРѕС…РѕРґРѕРј РїРѕ min_prefs
 		}
 	}
 	for (r = r + 1; r < n; ++r) {
@@ -91,12 +91,12 @@ int main() {
 		if (curr_sum > ans_sum) {
 			ans_sum = curr_sum;
 			ans_r = r;
-			// ans_l тут не узнаешь, потом за O(n) найдешь проходом по min_prefs
+			// ans_l С‚СѓС‚ РЅРµ СѓР·РЅР°РµС€СЊ, РїРѕС‚РѕРј Р·Р° O(n) РЅР°Р№РґРµС€СЊ РїСЂРѕС…РѕРґРѕРј РїРѕ min_prefs
 		}
 		if (cnt[uk].second == 1)
 			++curr_k;
 		while (curr_k >= k) {
-			++l; // когда это плохо? upd: вроде, никогда
+			++l; // РєРѕРіРґР° СЌС‚Рѕ РїР»РѕС…Рѕ? upd: РІСЂРѕРґРµ, РЅРёРєРѕРіРґР°
 			uk = lower_bound(cnt.begin(), cnt.end(), make_pair(a[l - 1], 0)) - cnt.begin();
 			--cnt[uk].second;
 			if (cnt[uk].second == 0)
@@ -111,7 +111,7 @@ int main() {
 			if (curr_sum > ans_sum) {
 				ans_sum = curr_sum;
 				ans_r = r;
-				// ans_l тут не узнаешь, потом за O(n) найдешь проходом по min_prefs
+				// ans_l С‚СѓС‚ РЅРµ СѓР·РЅР°РµС€СЊ, РїРѕС‚РѕРј Р·Р° O(n) РЅР°Р№РґРµС€СЊ РїСЂРѕС…РѕРґРѕРј РїРѕ min_prefs
 			}
 		}
 
@@ -128,8 +128,8 @@ int main() {
 	cout << ans_l + 1 << ' ' << ans_r + 1;
 
 }
-// l - первый ВХОДЯЩИЙ, r - последний входящий
-// в 0-индексации
+// l - РїРµСЂРІС‹Р№ Р’РҐРћР”РЇР©РР™, r - РїРѕСЃР»РµРґРЅРёР№ РІС…РѕРґСЏС‰РёР№
+// РІ 0-РёРЅРґРµРєСЃР°С†РёРё
 /*
 10 3
 3 -4 -3 -2 -2 3 0 1 -5 -4

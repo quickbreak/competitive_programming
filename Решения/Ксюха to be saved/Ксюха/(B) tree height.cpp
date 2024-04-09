@@ -12,7 +12,7 @@ int main() {
 
 	int n; cin >> n;
 	vector<int>parent_of(n);
-	// матрица смежности
+	// РјР°С‚СЂРёС†Р° СЃРјРµР¶РЅРѕСЃС‚Рё
 	vector<vector<int>>a(n);
 	int s;
 	for (int i = 0; i < n; ++i)
