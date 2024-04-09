@@ -4,6 +4,7 @@
 #include<cmath>
 #include<cstdio>
 #include<deque>
+#include<functional>
 #include<iostream>
 #include<map>
 #include<queue>
@@ -23,6 +24,7 @@
 #define sortv(v) sort(v.begin(), v.end());
 #define forl(a, k, b) for(long long a = k; a < b; ++a)
 #define useless ios_base::sync_with_stdio(false); cin.tie(NULL);
+//define int long long;
 
 using namespace std;
 
@@ -31,6 +33,8 @@ using str = string;
 using ld = long double;
 using vi = vector<int>;
 using vl = vector<ll>;
+using vvi = vector<vector<int>>;
+using vvl = vector<vector<long long>>;
 
 const ll mod = ll(1e9 + 7);
 
@@ -55,63 +59,42 @@ ll binpow(ll base, ll p)
 }
 
 
-string slow(str s) {
-
-
-
-	str answer;
-
-	return answer;
-}
-
-
-string wrong(str s) {
-	
-
-	str answer;
-
-	return answer;
-}
-
-
-int main()
+int32_t main()
 {
 	useless;
 	
-
-	str s; cin >> s;
-	cout << wrong(s);
-
-	//rarf kxkxk jloehamoj
-	/*str s = "aba";
-	str s1 = slow(s);
-	str s2 = wrong(s);
-	if (s1 != s2) {
-		cout << s1 << '\n' << s2;
+	int p, v, q, m; cin >> p >> v >> q >> m;
+	int ans = 0;
+	if (p <= q) {
+		int vasya_l = p - v;
+		int vasya_r = p + v;
+		int masha_l = q - m;
+		int masha_r = q + m;
+		masha_r = max(masha_r, vasya_r);
+		vasya_r = min(vasya_r, masha_l);
+		if (vasya_r - vasya_l + 1 > 0)
+		{
+			ans += vasya_r - vasya_l + 1;
+			if (masha_l <= p + v)
+				--ans;
+		}
+		ans += masha_r - masha_l + 1;
 	}
-	else cout << "success";*/
+	else {
+		int masha_l = q - m;
+		int masha_r = q + m;
+		int vasya_l = p - v;
+		int vasya_r = p + v;
+		vasya_r = max(vasya_r, masha_r);
+		masha_r = min(masha_r, vasya_l);
+		if (masha_r - masha_l + 1 > 0) {
+			ans += masha_r - masha_l + 1;
+			if (vasya_l <= q + m)
+				--ans;
+		}
+		ans += vasya_r - vasya_l + 1;
+		
+	}
+	cout << ans;
 
-	//fori(i, 0, 10000) {
-	//	random_device rd;   // non-deterministic generator
-	//	mt19937 gen(rd());  // to seed mersenne twister.
-	//	uniform_int_distribution<> distn(1, 10); // distribute results between 1 and 6 inclusive.
-	//	int n = distn(gen);
-	//	/*uniform_int_distribution<> distk(1, n);
-	//	int k = distk(gen);*/
-	//	uniform_int_distribution<> distai(0, 25);
-	//	str s;
-	//	for (int i = 0; i < n; ++i) {
-	//		s += char('a' + distai(gen));
-	//	}
-	//	str s1 = slow(s);
-	//	str s2 = wrong(s);
-	//	if (s1 != s2) {
-	//		cout << s;
-	//		cn;
-
-	//		cout << s1 << '\n' << s2;
-	//		break;
-	//	}
-	//}
-	//cout << "\nsuccess?";
 }

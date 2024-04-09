@@ -62,7 +62,7 @@ ll binpow(ll base, ll p)
 int32_t main()
 {
 	useless;
-	cout << 5;
+	// cout << 5;
 	// freopen("input.in", "rt", stdin);
 	// freopen("output.out", "wt", stdout);
 

@@ -39,20 +39,21 @@ int main()
     //freopen("INPUT.TXT", "r", stdin);
     //freopen("OUTPUT.TXT", "w", stdout);
 
-    int n; cin >> n;
-    if (n % 2 == 0)
-    {
-        int ans = n / 2;
-        cout << ans; cn;
-        fori(i, 0, ans)
-            cout << 2 << ' ';
-    }
-    else
-    {
-        int ans = (n-3) / 2;
-        cout << ans + 1; cn;
-        fori(i, 0, ans)
-            cout << 2 << ' ';
-        cout << 3;
+    map<char, int> dict_s;
+    map<char, int> dict_t;
+    int k = 4;
+    for (int i = 0; i < k; ++i)
+        dict_t[int('a' + i)]++;
+    string s = "abcdqwfenalenrinqwertyuioiasdfgjzvncb";
+    for (int i = 0; i < s.size(); ++i) {
+        if (dict_t.find(s[i]) != dict_t.end()) {
+            dict_s[s[i]]++;
+            if (i + 1 > k) {
+                dict_s[s[i - k]]--;
+            }
+
+        }
+        else cout << 1;
+        
     }
 }

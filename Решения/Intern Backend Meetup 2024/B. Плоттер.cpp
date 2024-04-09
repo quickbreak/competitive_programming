@@ -4,6 +4,7 @@
 #include<cmath>
 #include<cstdio>
 #include<deque>
+#include<functional>
 #include<iostream>
 #include<map>
 #include<queue>
@@ -23,6 +24,7 @@
 #define sortv(v) sort(v.begin(), v.end());
 #define forl(a, k, b) for(long long a = k; a < b; ++a)
 #define useless ios_base::sync_with_stdio(false); cin.tie(NULL);
+//define int long long;
 
 using namespace std;
 
@@ -31,6 +33,8 @@ using str = string;
 using ld = long double;
 using vi = vector<int>;
 using vl = vector<ll>;
+using vvi = vector<vector<int>>;
+using vvl = vector<vector<long long>>;
 
 const ll mod = ll(1e9 + 7);
 
@@ -55,63 +59,31 @@ ll binpow(ll base, ll p)
 }
 
 
-string slow(str s) {
-
-
-
-	str answer;
-
-	return answer;
-}
-
-
-string wrong(str s) {
-	
-
-	str answer;
-
-	return answer;
-}
-
-
-int main()
+int32_t main()
 {
 	useless;
 	
+	int n, m; cin >> n >> m;
+	int q; cin >> q;
+	int curr_x = 0, curr_y = 0, next_x, next_y;
+	char command;
+	set<pair<pair<int, int>, pair<int, int>>>st;
+	while (--q >= 0) {
+		cin >> command;
+		if (command == 'U')
+			next_x = curr_x, next_y = curr_y + 1;
+		else if (command == 'D')
+				next_x = curr_x, next_y = curr_y - 1;
+		else if (command == 'R')
+			next_x = curr_x + 1, next_y = curr_y;
+		else if (command == 'L')
+			next_x = curr_x - 1, next_y = curr_y;
 
-	str s; cin >> s;
-	cout << wrong(s);
+		st.insert({ {curr_x, curr_y}, {next_x, next_y} });
+		st.insert({ {next_x, next_y}, {curr_x, curr_y} });
 
-	//rarf kxkxk jloehamoj
-	/*str s = "aba";
-	str s1 = slow(s);
-	str s2 = wrong(s);
-	if (s1 != s2) {
-		cout << s1 << '\n' << s2;
+		curr_x = next_x;
+		curr_y = next_y;
 	}
-	else cout << "success";*/
-
-	//fori(i, 0, 10000) {
-	//	random_device rd;   // non-deterministic generator
-	//	mt19937 gen(rd());  // to seed mersenne twister.
-	//	uniform_int_distribution<> distn(1, 10); // distribute results between 1 and 6 inclusive.
-	//	int n = distn(gen);
-	//	/*uniform_int_distribution<> distk(1, n);
-	//	int k = distk(gen);*/
-	//	uniform_int_distribution<> distai(0, 25);
-	//	str s;
-	//	for (int i = 0; i < n; ++i) {
-	//		s += char('a' + distai(gen));
-	//	}
-	//	str s1 = slow(s);
-	//	str s2 = wrong(s);
-	//	if (s1 != s2) {
-	//		cout << s;
-	//		cn;
-
-	//		cout << s1 << '\n' << s2;
-	//		break;
-	//	}
-	//}
-	//cout << "\nsuccess?";
+	cout << st.size() / 2;
 }

@@ -34,6 +34,7 @@ using ld = long double;
 using vi = vector<int>;
 using vl = vector<ll>;
 using vvi = vector<vector<int>>;
+using vvl = vector<vector<long long>>;
 
 const ll mod = ll(1e9 + 7);
 
@@ -63,13 +64,61 @@ int32_t main()
 	useless;
 	
 	int n; cin >> n;
+	ll a, b, c;
+	while (--n >= 0) {
+		cin >> a >> b >> c;
+		if (a == 0 && b == 0) // если двое по нулям и третий не 1, то ггвп
+		{
+			if (c == 1) {
 
-	int cnt[] = {2, 2, 2, 2, 3, 0,3,2,2,2};
-	vi d(n + 1);
-	d[0] = 0;
-	d[1] = 8;
-	fori(i, 2, n) {
+				cout << "Yes\n";
+				continue;
+			}
+			else
+			{
+				cout << "No\n";
+				continue;
+			}
+		}
+		if (a == 0 && c == 0) // если двое по нулям и третий не 1, то ггвп
+		{
+			if (b == 1) {
 
+				cout << "Yes\n";
+				continue;
+			}
+			else
+			{
+				cout << "No\n";
+				continue;
+			}
+		}
+		if (c == 0 && b == 0) // если двое по нулям и третий не 1, то ггвп
+		{
+			if (a == 1) {
+
+				cout << "Yes\n";
+				continue;
+			}
+			else
+			{
+				cout << "No\n";
+				continue;
+			}
+		}
+		int chet = 0, nechet = 0;
+		if (a % 2 == 0)
+			chet++;
+		else nechet++;
+		if (b % 2 == 0)
+			chet++;
+		else nechet++;
+		if (c % 2 == 0)
+			chet++;
+		else nechet++;
+		if (chet == 2 && nechet == 1 || nechet == 2 && chet == 1)
+			cout << "Yes\n";
+		else cout << "No\n";
 	}
 
 }
