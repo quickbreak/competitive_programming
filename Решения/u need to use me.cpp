@@ -58,6 +58,26 @@ ll binpow(ll base, ll p)
     }
 }
 
+/*
+log base(number), 
+returns power such as base^power <= number 
+and answer if the number is the base in the power
+*/ 
+pair<int, bool> log(int base, int number) { 
+	if (base == 2) {
+		int power = 0;
+		while ((1 << power) < number)
+			++power;
+		return make_pair(power, (1 << power) == number);
+	}
+	int power = 0, baseinpower = 1;
+	while (baseinpower < number) {
+		++power;
+		baseinpower *= base;
+	}
+	return make_pair(power, baseinpower == number);
+}
+
 
 int32_t main()
 {
@@ -72,7 +92,7 @@ int32_t main()
 	// cout << a.size() << b.size();
 	// cout<<precision<<fixed;
 
-	// str s = "asvkdxbjc";
+	// str s = "asvkdxbjc";2
 	// vi a(10);
 	// a[0] = -2; a[9] = -3;
 	// for (char ch : s)
@@ -120,4 +140,25 @@ int32_t main()
 		};
 	*/
 	
+	// будем использовать 128-битный целый тип и напишем для него оператор вывода
+	/*using Int = __int128;
+	std::ostream& operator<<(std::ostream & os, Int number) {
+		if (number < 0) {
+			// выводим знак
+			os << '-';
+			number *= -1;
+		}
+		string digits;
+		do {
+			digits += char('0' + number % 10);
+			number /= 10;
+		} while (number > 0);
+		reverse(all(digits));
+		return os << digits;
+	}*/
+
+	/*
+	auto res = log(5, 125);
+	cout << res.first << ' ' << res.second << '\n';
+	*/
 }

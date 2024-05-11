@@ -4,10 +4,10 @@
 #include<cmath>
 #include<cstdio>
 #include<deque>
+#include<functional>
 #include<iostream>
 #include<map>
 #include<queue>
-#include<random>
 #include<set>
 #include<stack>
 #include<string>
@@ -31,6 +31,8 @@ using str = string;
 using ld = long double;
 using vi = vector<int>;
 using vl = vector<ll>;
+using vvi = vector<vector<int>>;
+using vvl = vector<vector<long long>>;
 
 const ll mod = ll(1e9 + 7);
 
@@ -55,63 +57,26 @@ ll binpow(ll base, ll p)
 }
 
 
-string slow(str s) {
-
-
-
-	str answer;
-
-	return answer;
-}
-
-
-string wrong(str s) {
-	
-
-	str answer;
-
-	return answer;
-}
-
-
 int main()
 {
 	useless;
 	
-
-	str s; cin >> s;
-	cout << wrong(s);
-
-	//rarf kxkxk jloehamoj
-	/*str s = "aba";
-	str s1 = slow(s);
-	str s2 = wrong(s);
-	if (s1 != s2) {
-		cout << s1 << '\n' << s2;
+	vvl d(11, vector<long long>(17));
+	d[2][2] = 2;
+	vl pr(11);
+	pr[2] = 1;
+	fori(i, 3, 11)
+	{
+		pr[i] = i - 1;
+		d[i][2] = pr[i] * i;
 	}
-	else cout << "success";*/
+	fori(i, 2, 11) {
+		fori(j, 3, 17) {
+			d[i][j] = (d[i][j - 1] - pr[i]) * i + pr[i] * (i - 1);
+			pr[i] = d[i][j - 1] - pr[i];
+		}
+	}
 
-	//fori(i, 0, 10000) {
-	//	random_device rd;   // non-deterministic generator
-	//	mt19937 gen(rd());  // to seed mersenne twister.
-	//	uniform_int_distribution<> distn(1, 10); // distribute results between 1 and 6 inclusive.
-	//	int n = distn(gen);
-	//	/*uniform_int_distribution<> distk(1, n);
-	//	int k = distk(gen);*/
-	//	uniform_int_distribution<> distai(0, 25);
-	//	str s;
-	//	for (int i = 0; i < n; ++i) {
-	//		s += char('a' + distai(gen));
-	//	}
-	//	str s1 = slow(s);
-	//	str s2 = wrong(s);
-	//	if (s1 != s2) {
-	//		cout << s;
-	//		cn;
-
-	//		cout << s1 << '\n' << s2;
-	//		break;
-	//	}
-	//}
-	//cout << "\nsuccess?";
+	int n, k; cin >> n >> k;
+	cout << d[k][n];
 }

@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        // пройти с первого до предпоследнего
+        // затем забыть про первый и пройти со второго до последнего
+        int n = nums.size();
+        int minus2 = nums[0], minus1, current;
+        int ans = minus2;
+        if (n > 1) {
+            minus1 = max(minus2, nums[1]);
+            ans = max(ans, minus1);
+        }
+        for(int i = 2; i < n - 1; ++i) {
+            current = max(minus2 + nums[i], minus1);
+            ans = max(ans, current);
+            minus2 = minus1;
+            minus1 = current;
+        }
+        minus2 = 0;
+        if (n > 1) {
+            minus1 = max(minus2, nums[1]);
+            ans = max(ans, minus1);
+        }
+        for(int i = 2; i < n; ++i) {
+            current = max(minus2 + nums[i], minus1);
+            ans = max(ans, current);
+            minus2 = minus1;
+            minus1 = current;
+        }
+
+        return ans;
+    }
+};

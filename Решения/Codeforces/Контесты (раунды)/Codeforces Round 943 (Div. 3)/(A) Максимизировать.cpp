@@ -4,6 +4,7 @@
 #include<cmath>
 #include<cstdio>
 #include<deque>
+#include<functional>
 #include<iostream>
 #include<map>
 #include<queue>
@@ -23,6 +24,7 @@
 #define sortv(v) sort(v.begin(), v.end());
 #define forl(a, k, b) for(long long a = k; a < b; ++a)
 #define useless ios_base::sync_with_stdio(false); cin.tie(NULL);
+//define int long long;
 
 using namespace std;
 
@@ -31,6 +33,8 @@ using str = string;
 using ld = long double;
 using vi = vector<int>;
 using vl = vector<ll>;
+using vvi = vector<vector<int>>;
+using vvl = vector<vector<long long>>;
 
 const ll mod = ll(1e9 + 7);
 
@@ -54,64 +58,27 @@ ll binpow(ll base, ll p)
 	}
 }
 
-
-string slow(str s) {
-
-
-
-	str answer;
-
-	return answer;
+int nod(int a, int b) {
+	if (b == 0)
+		return a;
+	return nod(a, a % b);
 }
 
 
-string wrong(str s) {
-	
-
-	str answer;
-
-	return answer;
-}
-
-
-int main()
+int32_t main()
 {
 	useless;
-	
 
-	str s; cin >> s;
-	cout << wrong(s);
-
-	//rarf kxkxk jloehamoj
-	/*str s = "aba";
-	str s1 = slow(s);
-	str s2 = wrong(s);
-	if (s1 != s2) {
-		cout << s1 << '\n' << s2;
+	int t, n; cin >> t;
+	while (--t >= 0) {
+		cin >> n;
+		int maxi = -1, ans = 1;;
+		for (int i = 1; i < n; ++i) {
+			if (i + nod(n, i) > maxi) {
+				maxi = i + nod(n, i);
+				ans = i;
+			}
+		}
+		cout << ans << '\n';
 	}
-	else cout << "success";*/
-
-	//fori(i, 0, 10000) {
-	//	random_device rd;   // non-deterministic generator
-	//	mt19937 gen(rd());  // to seed mersenne twister.
-	//	uniform_int_distribution<> distn(1, 10); // distribute results between 1 and 6 inclusive.
-	//	int n = distn(gen);
-	//	/*uniform_int_distribution<> distk(1, n);
-	//	int k = distk(gen);*/
-	//	uniform_int_distribution<> distai(0, 25);
-	//	str s;
-	//	for (int i = 0; i < n; ++i) {
-	//		s += char('a' + distai(gen));
-	//	}
-	//	str s1 = slow(s);
-	//	str s2 = wrong(s);
-	//	if (s1 != s2) {
-	//		cout << s;
-	//		cn;
-
-	//		cout << s1 << '\n' << s2;
-	//		break;
-	//	}
-	//}
-	//cout << "\nsuccess?";
 }

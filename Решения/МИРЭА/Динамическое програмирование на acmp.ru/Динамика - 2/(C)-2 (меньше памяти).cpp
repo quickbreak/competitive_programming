@@ -4,6 +4,7 @@
 #include<cmath>
 #include<cstdio>
 #include<deque>
+#include<functional>
 #include<iostream>
 #include<map>
 #include<queue>
@@ -23,6 +24,7 @@
 #define sortv(v) sort(v.begin(), v.end());
 #define forl(a, k, b) for(long long a = k; a < b; ++a)
 #define useless ios_base::sync_with_stdio(false); cin.tie(NULL);
+//define int long long;
 
 using namespace std;
 
@@ -31,6 +33,7 @@ using str = string;
 using ld = long double;
 using vi = vector<int>;
 using vl = vector<ll>;
+using vvi = vector<vector<int>>;
 
 const ll mod = ll(1e9 + 7);
 
@@ -55,63 +58,54 @@ ll binpow(ll base, ll p)
 }
 
 
-string slow(str s) {
-
-
-
-	str answer;
-
-	return answer;
-}
-
-
-string wrong(str s) {
-	
-
-	str answer;
-
-	return answer;
-}
-
-
-int main()
+int32_t main()
 {
 	useless;
-	
-
-	str s; cin >> s;
-	cout << wrong(s);
-
-	//rarf kxkxk jloehamoj
-	/*str s = "aba";
-	str s1 = slow(s);
-	str s2 = wrong(s);
-	if (s1 != s2) {
-		cout << s1 << '\n' << s2;
+	// дано поле из 1 и 0
+	// найти квадрат максимальной площади
+	// 1110
+	// 1111
+	// 1111
+	// 0111
+	// идея:
+	// рассмотрим длину квадрата в клетке i-1, j-1
+	// а также длину КВАДРАТОВ в клетке i-1, j и i, j-1
+	// 
+	int n; cin >> n;
+	vector a(n + 1, vector (n + 1, 0));
+	string s;
+	fori(i, 1, n + 1) {
+		cin >> s;
+		fori(j, 1, n + 1) {
+			a[i][j] = (s[j - 1] == '1' ? 1 : 0);
+		}
 	}
-	else cout << "success";*/
+	int ans = 0;
+	vector d(n + 1, vector (n + 1, 0));
+	fori(i, 1, n + 1) {
+		fori(j, 1, n + 1)
+		{
+			if (a[i][j] == 0) {
+				continue;
+			}
+			d[i][j] = min(d[i-1][j], d[i][j-1]);
+			d[i][j] = min(d[i][j], d[i - 1][j - 1]) + 1;
+			ans = max(d[i][j], ans);
+		}
+	}
+	cout << ans * ans;
 
-	//fori(i, 0, 10000) {
-	//	random_device rd;   // non-deterministic generator
-	//	mt19937 gen(rd());  // to seed mersenne twister.
-	//	uniform_int_distribution<> distn(1, 10); // distribute results between 1 and 6 inclusive.
-	//	int n = distn(gen);
-	//	/*uniform_int_distribution<> distk(1, n);
-	//	int k = distk(gen);*/
-	//	uniform_int_distribution<> distai(0, 25);
-	//	str s;
-	//	for (int i = 0; i < n; ++i) {
-	//		s += char('a' + distai(gen));
-	//	}
-	//	str s1 = slow(s);
-	//	str s2 = wrong(s);
-	//	if (s1 != s2) {
-	//		cout << s;
-	//		cn;
-
-	//		cout << s1 << '\n' << s2;
-	//		break;
-	//	}
-	//}
-	//cout << "\nsuccess?";
 }
+/*
+7
+1101101
+1111110
+1011100
+0011100
+1000010
+1100111
+1001110
+
+--9
+
+*/

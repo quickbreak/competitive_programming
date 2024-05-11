@@ -4,6 +4,7 @@
 #include<cmath>
 #include<cstdio>
 #include<deque>
+#include<functional>
 #include<iostream>
 #include<map>
 #include<queue>
@@ -23,6 +24,7 @@
 #define sortv(v) sort(v.begin(), v.end());
 #define forl(a, k, b) for(long long a = k; a < b; ++a)
 #define useless ios_base::sync_with_stdio(false); cin.tie(NULL);
+//define int long long;
 
 using namespace std;
 
@@ -31,6 +33,8 @@ using str = string;
 using ld = long double;
 using vi = vector<int>;
 using vl = vector<ll>;
+using vvi = vector<vector<int>>;
+using vvl = vector<vector<long long>>;
 
 const ll mod = ll(1e9 + 7);
 
@@ -54,64 +58,31 @@ ll binpow(ll base, ll p)
 	}
 }
 
-
-string slow(str s) {
-
-
-
-	str answer;
-
-	return answer;
+int nod(int a, int b) {
+	if (b == 0)
+		return a;
+	else 
+		return nod(b, a % b);
 }
 
-
-string wrong(str s) {
-	
-
-	str answer;
-
-	return answer;
-}
-
-
-int main()
+int32_t main()
 {
 	useless;
-	
+	// ((a + b) % (b * nod(a, b))) == 0 сколько существует пар (а, b)?
+	// 
+	// почему-то мы решили, что нам подойдут только какие-то из чисел, что делятся на b
+	int t, n; cin >> t;
+	while (--t >= 0) {
+		int m;
+		cin >> n >> m;
 
-	str s; cin >> s;
-	cout << wrong(s);
-
-	//rarf kxkxk jloehamoj
-	/*str s = "aba";
-	str s1 = slow(s);
-	str s2 = wrong(s);
-	if (s1 != s2) {
-		cout << s1 << '\n' << s2;
+		ll res = 0LL;
+		for (ll b = 1; b <= m; ++b) {
+			for (ll a = b; a <= n; a += b) { // только числа, которые делятся на b
+				if (((a + b) % (b * nod(a, b))) == 0)
+					++res;
+			}
+		}
+		cout << res << '\n';
 	}
-	else cout << "success";*/
-
-	//fori(i, 0, 10000) {
-	//	random_device rd;   // non-deterministic generator
-	//	mt19937 gen(rd());  // to seed mersenne twister.
-	//	uniform_int_distribution<> distn(1, 10); // distribute results between 1 and 6 inclusive.
-	//	int n = distn(gen);
-	//	/*uniform_int_distribution<> distk(1, n);
-	//	int k = distk(gen);*/
-	//	uniform_int_distribution<> distai(0, 25);
-	//	str s;
-	//	for (int i = 0; i < n; ++i) {
-	//		s += char('a' + distai(gen));
-	//	}
-	//	str s1 = slow(s);
-	//	str s2 = wrong(s);
-	//	if (s1 != s2) {
-	//		cout << s;
-	//		cn;
-
-	//		cout << s1 << '\n' << s2;
-	//		break;
-	//	}
-	//}
-	//cout << "\nsuccess?";
 }

@@ -1,0 +1,63 @@
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+#include<set>
+#include<vector>
+#include<algorithm>
+#include<stack>
+#include<queue>
+#include<deque>
+#include<map>
+#include<any>
+#include<string>
+#include<unordered_map>
+#include<unordered_set>
+#include<cassert>
+#include<bitset>
+
+#define fori(it, a, b) for(int it = a; it < b; it++)
+#define all(x) (x).begin(),(x).end()
+#define cn cout << '\n'
+#define minel(v) *min_element(v.begin(), v.end());
+#define maxel(v) *max_element(v.begin(), v.end());
+#define sortv(v) sort(v.begin(), v.end());
+#define forl(a, k, b) for(long long a = k; a < b; a++)
+#define useless ios_base::sync_with_stdio(false); cin.tie(NULL);
+
+using namespace std;
+
+using ll = long long;
+using str = string;
+using ld = long double;
+using vi = vector<int>;
+using vl = vector<ll>;
+
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int t, n, m; cin >> t;
+    while (--t >= 0) {
+        cin >> n >> m;
+        vector<int>a(n + 1);
+        for (int i = 1; i <= n; ++i)
+            cin >> a[i];
+        string s; s.assign(m + 1, 'B');
+
+        int index;
+        for (int i = 1; i <= n; ++i) {
+            index = a[i];
+            if (s[min(index, m + 1 - index)] == 'B')
+                s[min(index, m + 1 - index)] = 'A';
+            else
+                s[max(index, m + 1 - index)] = 'A';
+        }
+
+        for (int i = 1; i <= m; ++i)
+            cout << s[i];
+        cout << '\n';
+    }
+
+}

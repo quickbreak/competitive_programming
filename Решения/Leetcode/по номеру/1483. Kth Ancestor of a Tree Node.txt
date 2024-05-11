@@ -1,0 +1,44 @@
+class TreeAncestor {
+public:
+    vector<vector<int>>up; // up[u][pow] - (2^pow)тый предок вершины u
+    int LOG = 0; // 2^LOG - максимальная высота дерева
+    TreeAncestor(int n, vector<int>& parent) {
+        int size = 1;
+        while (size < n) {
+            size *= 2;
+            ++LOG;
+        }
+
+        up = vector<vector<int>>(n, vector<int>(LOG + 1));
+        for (int u = 1; u < n; ++u) {
+            up[u][0] = parent[u]; // первый предок любой вершины - её родитель
+        }
+        up[0].assign(LOG+1, -1); // если k > высоты дереваЮ выведется -1
+        for (int pow = 1; pow <= LOG; ++pow) { // переберём степени двойки
+            for (int u = 1; u < n; ++u) { // для каждой вершины
+                // (2^pow)тый предок - это (2^(pow-1))ый предок (2^(pow-1))го предка
+                up[u][pow] = up[max(up[u][pow-1], 0)][pow-1];
+            }
+        }
+        
+    }
+    
+    int getKthAncestor(int node, int k) {
+        for (int pow = 0; pow <= LOG; ++pow) {// бужто мы разложили число по степеням двойки, 
+            // и шагаем по ним
+            if ((k & (1 << pow)) != 0) { // если в двоичном представлении числа k есть единица на
+            // позиции pow, число (2^pow) присутствует в разложении
+                node = up[node][pow];
+                if (node == -1)
+                    break;
+            }
+        }
+        return node;
+    }
+};
+
+/**
+ * Your TreeAncestor object will be instantiated and called as such:
+ * TreeAncestor* obj = new TreeAncestor(n, parent);
+ * int param_1 = obj->getKthAncestor(node,k);
+ */

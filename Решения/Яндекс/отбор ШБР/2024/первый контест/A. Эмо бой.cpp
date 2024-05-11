@@ -1,9 +1,10 @@
-﻿#include<algorithm>
+#include<algorithm>
 #include<any>
 #include<cassert>
 #include<cmath>
 #include<cstdio>
 #include<deque>
+#include<functional>
 #include<iostream>
 #include<map>
 #include<queue>
@@ -23,6 +24,7 @@
 #define sortv(v) sort(v.begin(), v.end());
 #define forl(a, k, b) for(long long a = k; a < b; ++a)
 #define useless ios_base::sync_with_stdio(false); cin.tie(NULL);
+//define int long long;
 
 using namespace std;
 
@@ -31,6 +33,8 @@ using str = string;
 using ld = long double;
 using vi = vector<int>;
 using vl = vector<ll>;
+using vvi = vector<vector<int>>;
+using vvl = vector<vector<long long>>;
 
 const ll mod = ll(1e9 + 7);
 
@@ -55,63 +59,32 @@ ll binpow(ll base, ll p)
 }
 
 
-string slow(str s) {
-
-
-
-	str answer;
-
-	return answer;
-}
-
-
-string wrong(str s) {
-	
-
-	str answer;
-
-	return answer;
-}
-
-
-int main()
+int32_t main()
 {
 	useless;
 	
-
 	str s; cin >> s;
-	cout << wrong(s);
-
-	//rarf kxkxk jloehamoj
-	/*str s = "aba";
-	str s1 = slow(s);
-	str s2 = wrong(s);
-	if (s1 != s2) {
-		cout << s1 << '\n' << s2;
+	int n = s.size();
+	int Bigcnt = 0, Smallcnt = 0, Numcnt = 0;
+	unordered_set<char>Numbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+	unordered_set<char>Bigletter, Smallletters;
+	for (int i = 0; i < 26; ++i) {
+		Bigletter.insert(char('A' + i));
 	}
-	else cout << "success";*/
+	for (int i = 0; i < 26; ++i) {
+		Smallletters.insert(char('a' + i));
+	}
 
-	//fori(i, 0, 10000) {
-	//	random_device rd;   // non-deterministic generator
-	//	mt19937 gen(rd());  // to seed mersenne twister.
-	//	uniform_int_distribution<> distn(1, 10); // distribute results between 1 and 6 inclusive.
-	//	int n = distn(gen);
-	//	/*uniform_int_distribution<> distk(1, n);
-	//	int k = distk(gen);*/
-	//	uniform_int_distribution<> distai(0, 25);
-	//	str s;
-	//	for (int i = 0; i < n; ++i) {
-	//		s += char('a' + distai(gen));
-	//	}
-	//	str s1 = slow(s);
-	//	str s2 = wrong(s);
-	//	if (s1 != s2) {
-	//		cout << s;
-	//		cn;
-
-	//		cout << s1 << '\n' << s2;
-	//		break;
-	//	}
-	//}
-	//cout << "\nsuccess?";
+	for (int i = 0; i < n; ++i) {
+		if (Numbers.contains(s[i]))
+			++Numcnt;
+		else if (Bigletter.contains(s[i]))
+			++Bigcnt;
+		else if (Smallletters.contains(s[i]))
+			++Smallcnt;
+	}
+	if (n >= 8 && Numcnt > 0 && Bigcnt > 0 && Smallcnt > 0) {
+		cout << "YES\n";
+	}
+	else cout << "NO\n";
 }
