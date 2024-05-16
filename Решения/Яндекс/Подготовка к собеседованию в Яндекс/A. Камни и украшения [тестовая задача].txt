@@ -1,0 +1,16 @@
+#include<iostream>
+#include<string>
+#include<unordered_set>
+
+using namespace std;
+
+int main() {
+    unordered_set<char>st;
+    string s, j; cin >> j >> s;
+    int ans = 0;
+    for (char ch : j)
+        st.insert(ch);
+    for(char ch : s)
+        ans += st.contains(ch);
+    cout << ans;
+}

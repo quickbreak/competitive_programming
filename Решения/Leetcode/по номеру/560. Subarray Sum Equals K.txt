@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        int n = nums.size();
+        unordered_map<long long, int>mp;
+        ++mp[0];
+        long long summa = 0, ans = 0;
+        for (int& x : nums)
+        {
+            summa += x;
+            // summa - m == k
+            // summa - k == m
+            ans += mp[summa-k];
+            ++mp[summa];
+        }
+        return ans;
+    }
+};

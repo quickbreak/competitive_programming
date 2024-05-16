@@ -1,0 +1,54 @@
+#include<iostream>
+#include<vector>
+#include<set>
+
+using namespace std;
+
+int main() {
+    int n; cin >> n;
+    vector<pair<long long, long long>>coordinates(n);
+    for (int i = 0; i < n; ++i)
+    {
+        cin >> coordinates[i].first >> coordinates[i].second;
+    }
+    vector<vector<int>>adj(n); // по итогу здесь хранятся только дороги, по которым можно проехать
+    long long dist, permitted; cin >> permitted;
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < n; ++j)
+        {
+            dist = abs(coordinates[i].first-coordinates[j].first) + 
+                abs(coordinates[i].second-coordinates[j].second);
+            if (dist <= permitted)
+            {
+                adj[i].push_back(j);
+            }
+        }
+    }
+    vector<int>mindist(n, 1000000000);
+    vector<int>used(n);
+    int s, f; cin >> s >> f;
+    --s, --f;
+    set<pair<int, int>>st; // за сколько дорог, в какую вершину
+    st.insert(make_pair(0, s)); 
+    while(st.size() > 0)
+    {
+        auto p = *st.begin();
+        st.erase(st.begin());
+        if (used[p.second])
+            continue;
+
+        used[p.second] = 1;
+        mindist[p.second] = p.first;
+        if (p.second == f)
+            break;
+        for (int j : adj[p.second])
+            if(!used[j])
+                st.insert({mindist[p.second] + 1, j});
+
+    }
+    if (mindist[f] < 1000000000)
+        cout << mindist[f];
+    else 
+        cout << -1;
+}

@@ -1,0 +1,30 @@
+#include<iostream>
+#include<vector>
+#include<string>
+
+using namespace std;
+
+int main() {
+    string j, s; 
+    cin >> j >> s;
+    vector<int>cnt(26);
+    for (char ch : j)
+        ++cnt[ch-'a'];
+    for (char ch : s)
+    {
+        --cnt[ch -'a'];
+    }
+    bool different = false;
+    for (int x : cnt)
+    {
+        if (x != 0)
+        {
+            different = true;
+            break;
+        }
+    }
+    if (different)
+        cout << 0;
+    else 
+        cout << 1;
+}

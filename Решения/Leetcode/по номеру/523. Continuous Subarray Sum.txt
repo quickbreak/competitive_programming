@@ -1,0 +1,23 @@
+class Solution {
+public:
+    bool checkSubarraySum(vector<int>& nums, int k) {
+        unordered_set<int>mods;
+        int n = nums.size();
+        if (n == 1)
+            return false;
+        long long summa = nums[0] + nums[1];
+        if (summa % k == 0)
+            return true;
+        mods. insert((summa - nums[1]) % k);
+        for (int i = 2; i < n; ++i)
+        {
+            summa += nums[i];
+            if (mods.contains(summa % k) || (summa % k == 0))
+            {
+                return true;
+            }
+            mods.insert((summa - nums[i]) % k);
+        }
+        return false;
+    }
+};
