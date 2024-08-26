@@ -7,72 +7,64 @@ using namespace std;
 #define ReadFast ios_base::sync_with_stdio(false); cin.tie(0);
 
 struct DSU {
+private:
+	vector<int>root, size, change;
+	bool change_needed = false;
+	
+	int compressRoot(int u) {
+		return (u == root[u] ? u : root[u] = compressRoot(root[u]));
+	}
+	int compressColour(int u) {
+		return (u == root[u] ? 0 : change[u] = (compressColour(root[u]) + change[u]) % 2);
+	}
+	void compress(int u) {
+		compressColour(u);
+		compressRoot(u);
+	}
+	void changeColours(int u) {
+		// compress(u);
+		// u = root[u];
+		change[u] = 1; // см. МЫСЛЬ
+	}
 public:
-	vector<int>roots, sizes, colour, change;
 	DSU(int n):
-		roots(n),
-		sizes(n, 1),
-		colour(n),
+		root(n),
+		size(n, 1),
 		change(n)
 	{
 		for(int i = 0; i < n; ++i){
-			roots[i] = i;
+			root[i] = i;
 		}
-	}
-	pair<int, int> update_branch(int u) {
-		if (u == roots[u]) { // u - корень
-			return {change[u], u};
-		} else if (roots[u] == roots[roots[u]]) { // u - предкорень
-			return {change[u] + change[roots[u]], roots[u]};
-		} else {
-			auto p = update_branch(roots[u]);
-			change[u] += p.first;
-			roots[u] = p.second;
-			p.first = change[u];
-			return p;
-		}
-	}
-	int get_root(int u) {
-		update_branch(u);
-		return roots[u];
-	}
-	void changeColours(int u) {
-		u = get_root(u);
-		change[u] = 1; // см. МЫСЛЬ
-	}
-	int get_colour(int u) {
-		update_branch(u);
-		if (u != roots[u] && roots[u] == roots[roots[u]]) { // u - предкорень
-			return (change[u] + change[roots[u]]) % 2;
-		}
-		return change[u] % 2; // colour[u] всегда 0
 	}
 	bool haveSameColour(int u, int v) {
-		return get_colour(u) == get_colour(v);
+		compress(u);
+		compress(v);
+		return change[u] % 2 == change[v] % 2;
 	}
 	void unite(int u, int v) {
-		int root_u = get_root(u);
-		int root_v = get_root(v);
-		if (root_u == root_v)
+		change_needed = haveSameColour(u, v); // compress done, повторно нигде сжимать не надо
+		u = root[u];
+		v = root[v];
+		if (u == v)
 			return;
-		if (sizes[root_u] > sizes[root_v]) {
-			std::swap(root_u, root_v);
+		if (size[u] > size[v]) {
 			std::swap(u, v);
 		}
-		if (haveSameColour(u, v)) {
+		if (change_needed) {
 			changeColours(u); // меняем цвета всем вершинам компоненты, где лежит u
 		}
-		roots[root_u] = root_v;
-		sizes[root_v] += sizes[root_u];
+		root[u] = v;
+		size[v] += size[u];
 	}
 };
-// МЫСЛЬ: change[u] либо 0, либо 1
-// увеличиться может один раз - при присоединении,
-// то есть когда u перестаёт быть корнем
+/*
+МЫСЛЬ:
+когда мы присоединяем root_u к root_v, change[root_v] == 0
+(и до присоединения change[root_u] тоже == 0, после, если надо, мы меняем)
+*/
 int main() {
 	ReadFast;
 	int n, q; cin >> n >> q;
-	vector<int>colour(n, -1);
 	int typ, u, v, shift = 0;
 	DSU dsu(n);
 	while (q --> 0) {

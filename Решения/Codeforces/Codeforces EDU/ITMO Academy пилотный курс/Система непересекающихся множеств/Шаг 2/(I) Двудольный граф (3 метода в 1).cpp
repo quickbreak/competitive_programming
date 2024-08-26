@@ -10,38 +10,38 @@ struct DSU {
 private:
 	vector<int>root, size, change;
 	bool change_needed = false;
-	
+
 	pair<int, int> compress(int u) {
 		if (u == root[u]) {
-			return {0, u};
-		} else {
+			return { 0, u };
+		}
+		else {
 			auto p = compress(root[u]);
 			change[u] += p.first;
 			change[u] %= 2;
 			root[u] = p.second;
-			return {change[u], root[u]};
+			return { change[u], root[u] };
 		}
 	}
 	void changeColours(int u) {
+		// compress(u);
+		// u = root[u];
 		change[u] = 1; // см. МЫСЛЬ
 	}
-	bool areConnected(int u, int v) {
-		return root[u] == root[v];
+public:
+	DSU(int n) :
+		root(n),
+		size(n, 1),
+		change(n)
+	{
+		for (int i = 0; i < n; ++i) {
+			root[i] = i;
+		}
 	}
 	bool haveSameColour(int u, int v) {
 		compress(u);
 		compress(v);
 		return change[u] == change[v];
-	}
-public:
-	DSU(int n):
-		root(n + 1),
-		size(n + 1, 1),
-		change(n + 1)
-	{
-		for(int i = 1; i <= n; ++i){
-			root[i] = i;
-		}
 	}
 	void unite(int u, int v) {
 		change_needed = haveSameColour(u, v); // compress done, повторно нигде сжимать не надо
@@ -58,9 +58,6 @@ public:
 		root[u] = v;
 		size[v] += size[u];
 	}
-	bool canBeAdded (int u, int v) {
-		return !haveSameColour(u, v) || !areConnected(u, v);
-	}
 };
 /*
 МЫСЛЬ:
@@ -69,16 +66,25 @@ public:
 */
 int main() {
 	ReadFast;
-	int n, m; cin >> n >> m;
-	int u, v, ans = -1;
+	int n, q; cin >> n >> q;
+	int typ, u, v, shift = 0;
 	DSU dsu(n);
-	for (int i = 1; i <= m; ++i) {
-		cin >> u >> v;
-		if (dsu.canBeAdded(u, v)) {
+	while (q-- > 0) {
+		cin >> typ >> u >> v;
+		u = (u + shift) % n;
+		v = (v + shift) % n;
+		if (typ == 0) {
 			dsu.unite(u, v);
-		} else if (ans == -1) {
-			ans = i;
+		}
+		else {
+			if (dsu.haveSameColour(u, v)) {
+				cout << "YES\n";
+				++shift;
+				shift %= n;
+			}
+			else {
+				cout << "NO\n";
+			}
 		}
 	}
-	cout << ans;
 }
