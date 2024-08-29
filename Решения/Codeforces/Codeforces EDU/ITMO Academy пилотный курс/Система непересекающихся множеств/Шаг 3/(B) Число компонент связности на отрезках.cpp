@@ -39,17 +39,17 @@ public:
 		if (sizes[u] > sizes[v]) {
 			std::swap(u, v);
 		}
-		history.push({ &roots[u], roots[u] });
+		history.push({&roots[u], roots[u]});
 		history.push({&sizes[v], sizes[v]});
 		history.push({&components_cnt, components_cnt});
 		roots[u] = v;
 		sizes[v] += sizes[u];
 		--components_cnt;
 	}
-	void persist(){
+	void persist() {
 		history.push({NULL, 0});
 	}
-	int rollback() {
+	void rollback() {
 		while(true) {
 			p = history.top();
 			history.pop();
@@ -59,7 +59,6 @@ public:
 				*p.first = p.second;
 			}
 		}
-		return components_cnt;
 	}
 	int get_components_cnt() {
 		return components_cnt;
