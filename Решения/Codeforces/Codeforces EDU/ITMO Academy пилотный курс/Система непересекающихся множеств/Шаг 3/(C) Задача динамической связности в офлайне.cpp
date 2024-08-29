@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <vector>
 #include <stack>
 #include <map>
@@ -76,13 +76,13 @@ void solve(int l, int r, const vector<Query>& edge_queries, PersDSU& dsu) {
 	if (l == r - 1) {
 		dsu.persist();
 		for (const Query& q : edge_queries) {
-			// если ребро есть в этот момент l (но его не было до него / его не будет после, 
-			// поэтому оно добавляется на таком низком уровень)
+			// РµСЃР»Рё СЂРµР±СЂРѕ РµСЃС‚СЊ РІ СЌС‚РѕС‚ РјРѕРјРµРЅС‚ l (РЅРѕ РµРіРѕ РЅРµ Р±С‹Р»Рѕ РґРѕ РЅРµРіРѕ / РµРіРѕ РЅРµ Р±СѓРґРµС‚ РїРѕСЃР»Рµ, 
+			// РїРѕСЌС‚РѕРјСѓ РѕРЅРѕ РґРѕР±Р°РІР»СЏРµС‚СЃСЏ РЅР° С‚Р°РєРѕРј РЅРёР·РєРѕРј СѓСЂРѕРІРµРЅСЊ)
 			if (q.left <= l && q.right >= r) {
 				dsu.unite(q.u, q.v);
 			}
 		}
-		// самый низкий уровень, отвечаем здесь на запрос количества компонент в момент l
+		// СЃР°РјС‹Р№ РЅРёР·РєРёР№ СѓСЂРѕРІРµРЅСЊ, РѕС‚РІРµС‡Р°РµРј Р·РґРµСЃСЊ РЅР° Р·Р°РїСЂРѕСЃ РєРѕР»РёС‡РµСЃС‚РІР° РєРѕРјРїРѕРЅРµРЅС‚ РІ РјРѕРјРµРЅС‚ l
 		ans[l] = dsu.get_components_cnt();
 		dsu.rollback();
 		return;
@@ -90,11 +90,11 @@ void solve(int l, int r, const vector<Query>& edge_queries, PersDSU& dsu) {
 	dsu.persist();
 	vector<Query>edge_queries2;
 	for (const Query& q : edge_queries) {
-		// если ребро есть на всём [l, r] отрезке
+		// РµСЃР»Рё СЂРµР±СЂРѕ РµСЃС‚СЊ РЅР° РІСЃС‘Рј [l, r] РѕС‚СЂРµР·РєРµ
 		if (q.left <= l && q.right >= r) {
 			dsu.unite(q.u, q.v);
 		}
-		// если ребро пересекает [l, r], то есть будет пересекать полностью часть [l, r]
+		// РµСЃР»Рё СЂРµР±СЂРѕ РїРµСЂРµСЃРµРєР°РµС‚ [l, r], С‚Рѕ РµСЃС‚СЊ Р±СѓРґРµС‚ РїРµСЂРµСЃРµРєР°С‚СЊ РїРѕР»РЅРѕСЃС‚СЊСЋ С‡Р°СЃС‚СЊ [l, r]
 		else if (q.left >= l && q.left < r || q.right > l && q.right <= r) {
 			edge_queries2.push_back(q);
 		}
@@ -108,12 +108,12 @@ void solve(int l, int r, const vector<Query>& edge_queries, PersDSU& dsu) {
 int main() {
 	ReadFast;
 	int n, q; cin >> n >> q;
-	vector<Query>edge_queries; // заросы добавления - удаления ребра
+	vector<Query>edge_queries; // Р·Р°СЂРѕСЃС‹ РґРѕР±Р°РІР»РµРЅРёСЏ - СѓРґР°Р»РµРЅРёСЏ СЂРµР±СЂР°
 	char typ;
 	int u, v;
 	Query qu;
-	map<pair<int, int>, int>edge; // запросы добавления ребра
-	vector<int>get_queries; // запросы количества компонент связности
+	map<pair<int, int>, int>edge; // Р·Р°РїСЂРѕСЃС‹ РґРѕР±Р°РІР»РµРЅРёСЏ СЂРµР±СЂР°
+	vector<int>get_queries; // Р·Р°РїСЂРѕСЃС‹ РєРѕР»РёС‡РµСЃС‚РІР° РєРѕРјРїРѕРЅРµРЅС‚ СЃРІСЏР·РЅРѕСЃС‚Рё
 	auto point = edge.end();
 	for (int i = 0; i < q; ++i) {
 		cin >> typ;
@@ -147,14 +147,14 @@ int main() {
 	}
 	PersDSU dsu(n);
 	ans.assign(q, -1);
-	if (q > 0) // гений на авторе добавил тест с 0 запросов
+	if (q > 0) // РіРµРЅРёР№ РЅР° Р°РІС‚РѕСЂРµ РґРѕР±Р°РІРёР» С‚РµСЃС‚ СЃ 0 Р·Р°РїСЂРѕСЃРѕРІ
 		solve(0, q, edge_queries, dsu);
-	for (auto& time : get_queries) // выводим ответы на запросы количества к.с.
+	for (auto& time : get_queries) // РІС‹РІРѕРґРёРј РѕС‚РІРµС‚С‹ РЅР° Р·Р°РїСЂРѕСЃС‹ РєРѕР»РёС‡РµСЃС‚РІР° Рє.СЃ.
 		cout << ans[time] << '\n';
 }
 
 /*
-assert показал:
-может быть запрос на добавление ребра u v
-а потом на удаление v u
+assert РїРѕРєР°Р·Р°Р»:
+РјРѕР¶РµС‚ Р±С‹С‚СЊ Р·Р°РїСЂРѕСЃ РЅР° РґРѕР±Р°РІР»РµРЅРёРµ СЂРµР±СЂР° u v
+Р° РїРѕС‚РѕРј РЅР° СѓРґР°Р»РµРЅРёРµ v u
 */
