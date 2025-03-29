@@ -1,0 +1,27 @@
+a = int(input())
+b = int(input())
+c = int(input())
+d = int(input())
+
+if b == 0:
+    if d == 0:
+        print("1\n1")
+    else:
+        print(1, d + 1, sep='\n')
+elif d == 0:
+    print(b + 1, 1, sep='\n')
+elif a == 0:
+    if c == 0:
+        print("1\n1")
+    else:
+        print(1, c + 1, sep = '\n')
+elif c == 0:
+    print(a + 1, 1, sep = '\n')
+elif a + c + 2 < b + d + 2 and a + c + 2 < 1 + max(c, d) + 1 and a + c + 2 < 1 + max(a, b) + 1:
+    print(a + 1, c + 1, sep = '\n')
+elif b + d + 2 < a + c + 2 and b + d + 2 < 1 + max(c, d) + 1 and b + d + 2 < 1 + max(a, b) + 1:
+    print(b + 1, d + 1, sep = '\n')
+elif 1 + max(c, d) + 1 < a + c + 2 and 1 + max(c, d) + 1 < b + d + 2 and 1 + max(c, d) + 1 < 1 + max(a, b) + 1:
+    print(1, max(c, d) + 1, sep='\n')
+else:
+    print(max(a, b) + 1, 1, sep='\n')

@@ -1,0 +1,13 @@
+12
+0 50 heat
+50 0 freeze
+0 50 auto
+50 0 fan
+0 50 freeze
+50 0 heat
+-50 1 fan
+2 -50 auto
+3 3 fan
+3 3 heat
+3 3 freeze
+3 3 auto
